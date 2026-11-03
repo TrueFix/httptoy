@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<project>
+  <httptoy>
+      <name>httptoy</name>
+      <author>mayank gupta</author>
+      <github>https://github.com/TrueFix/httptoy</github>
+  </httptoy>
+</project>

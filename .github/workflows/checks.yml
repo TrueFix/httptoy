@@ -1,0 +1,37 @@
+name: Checks
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: '23 6 * * 1'
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - id: toolchain
+        name: Use the Docker production toolchain
+        run: |
+          version=$(sed -n 's/^FROM golang:\([^@ ]*\)@.* AS catalog$/\1/p' Dockerfile)
+          test -n "$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+      - uses: actions/setup-go@40f1582b2485089dde7abd97c1529aa768e1baff # v5
+        with:
+          go-version: ${{ steps.toolchain.outputs.version }}
+          check-latest: false
+      - name: Build and check embedded frontend with the production Node image
+        run: |
+          image=$(sed -n 's/^FROM \(node:[^ ]*\) AS frontend$/\1/p' Dockerfile)
+          test -n "$image"
+          go run ./cmd/site-data > "$RUNNER_TEMP/openapi-site.json"
+          docker run --rm -v "$PWD:/src" -v "$RUNNER_TEMP/openapi-site.json:/openapi-site.json:ro" -w /src/frontend "$image" sh -c 'npm ci && node scripts/catalog.mjs /openapi-site.json && npm run typecheck && npm run build:static && npm audit'
+      - run: go mod verify
+      - run: go mod tidy -diff
+      - run: go test -race ./...
+      - run: go vet ./...
+      - run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 ./...
+      - run: CGO_ENABLED=0 GOOS=linux go build -mod=readonly -trimpath -ldflags='-s -w' -o build/httptoy .
+      - run: go run golang.org/x/vuln/cmd/govulncheck@v1.9.0 -mode=binary build/httptoy
+      - run: docker build -t httptoy:test .

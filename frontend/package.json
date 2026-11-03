@@ -1,0 +1,31 @@
+{
+  "name": "httptoy-site",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "catalog": "node scripts/catalog.mjs",
+    "build": "npm run catalog && npm run build:static",
+    "build:static": "node scripts/licenses.mjs && vite build && vite build --ssr src/entry-server.tsx --outDir .ssr && node scripts/render.mjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@fontsource-variable/big-shoulders": "5.3.0",
+    "@fontsource-variable/public-sans": "5.3.0",
+    "framer-motion": "14.9.0",
+    "lucide-react": "1.67.0",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "4.3.4",
+    "@types/node": "26.6.6",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.2.1",
+    "tailwindcss": "4.3.4",
+    "typescript": "7.0.2",
+    "vite": "8.3.5"
+  }
+}

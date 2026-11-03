@@ -1,0 +1,10 @@
+version 3
+
+details:
+  projects:
+    httptoy:
+      author:
+        name: "mayank gupta"
+        link:
+          github: "https://github.com/TrueFix/httptoy"
+    

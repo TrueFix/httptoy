@@ -1,0 +1,871 @@
+[
+  {
+    "path": "/abort",
+    "methods": [
+      "GET"
+    ],
+    "description": "Deliberately interrupt a response to test client recovery.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/anything",
+    "methods": [
+      "DELETE",
+      "GET",
+      "HEAD",
+      "OPTIONS",
+      "PATCH",
+      "POST",
+      "PUT",
+      "TRACE",
+      "CONNECT"
+    ],
+    "description": "Echo any supported HTTP method, headers, query parameters, and body.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/anything/{path}",
+    "methods": [
+      "DELETE",
+      "GET",
+      "HEAD",
+      "OPTIONS",
+      "PATCH",
+      "POST",
+      "PUT",
+      "TRACE",
+      "CONNECT"
+    ],
+    "description": "Inspect a request at any nested path, with configurable CORS.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/auth/digest",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test auth behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/base64de/{data}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test base64de behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/base64en/{data}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test base64en behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/basic",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test basic behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/basic/{username}/{password}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test basic behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/bearer",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test bearer behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/body/{data}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test body behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/brotli",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test brotli behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/bytes/{count}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test bytes behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/cache/{seconds}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Set cache headers and exercise conditional requests.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/capabilities",
+    "methods": [
+      "GET"
+    ],
+    "description": "Discover supported features and resource limits",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/checksum/{algorithm}",
+    "methods": [
+      "POST"
+    ],
+    "description": "Test checksum behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/collection.json",
+    "methods": [
+      "GET"
+    ],
+    "description": "Download a Postman collection with session variables",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/compression/negotiate",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test compression behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/connection",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test connection behavior with a bounded HTTP fixture.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/cookies",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test cookies behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/cookies/delete/{key}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test cookies behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/cookies/inspect",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test cookies behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/cookies/set",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test cookies behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/cookies/set/{key}/{value}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test cookies behavior with a bounded HTTP fixture.",
+    "group": "Auth & cookies",
+    "auth": false
+  },
+  {
+    "path": "/decompress/{coding}",
+    "methods": [
+      "POST"
+    ],
+    "description": "Inspect a bounded compressed upload",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/deflate",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test deflate behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/delay/{seconds}",
+    "methods": [
+      "DELETE",
+      "GET",
+      "PATCH",
+      "POST",
+      "PUT"
+    ],
+    "description": "Delay a response by up to ten seconds; honor cancellation.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/delete",
+    "methods": [
+      "DELETE"
+    ],
+    "description": "Inspect a DELETE request and its body.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/download/{filename}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test download behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/drip",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test drip behavior with a bounded HTTP fixture.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/early-hints",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test early hints behavior with a bounded HTTP fixture.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/encoding/{charset}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test encoding behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/etag/{value}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test entity tags, 304 responses, and preconditions.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/expect-continue",
+    "methods": [
+      "POST"
+    ],
+    "description": "Accept or reject an upload before reading its body",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/get",
+    "methods": [
+      "GET"
+    ],
+    "description": "Inspect query parameters, request headers, client IP, and URL.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/gzip",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test gzip behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/header/{header_name}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Read a single request header.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/headers",
+    "methods": [
+      "GET"
+    ],
+    "description": "Return the incoming request headers.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/healthz",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test healthz behavior with a bounded HTTP fixture.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/html",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test html behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/image",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test image behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/image/jpeg",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test image behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/image/png",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test image behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/image/svg",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test image behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/image/webp",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test image behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/informational/{code}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test informational behavior with a bounded HTTP fixture.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/ip",
+    "methods": [
+      "GET"
+    ],
+    "description": "Return the proxy-validated client IP.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/json",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test json behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/language",
+    "methods": [
+      "GET"
+    ],
+    "description": "Negotiate a greeting using Accept-Language",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/large-headers",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test large headers behavior with a bounded HTTP fixture.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/links/{count}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test links behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/metrics",
+    "methods": [
+      "GET"
+    ],
+    "description": "Prometheus counters, latency histograms, and resource-pool gauges.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/multipart/response",
+    "methods": [
+      "POST"
+    ],
+    "description": "Test multipart behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/negotiate",
+    "methods": [
+      "GET"
+    ],
+    "description": "Negotiate a representation using Accept",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/openapi.json",
+    "methods": [
+      "GET"
+    ],
+    "description": "Discover all registered routes as OpenAPI 3.1",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/patch",
+    "methods": [
+      "PATCH"
+    ],
+    "description": "Inspect a PATCH request and its body.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/post",
+    "methods": [
+      "POST"
+    ],
+    "description": "Inspect a POST body as JSON, form data, multipart, or text.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/problem/{status}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Return an RFC 9457 problem response",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/put",
+    "methods": [
+      "PUT"
+    ],
+    "description": "Inspect a PUT request and its body.",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/range/{size}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test byte ranges, resumable downloads, and 206 responses.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/redirect-delay/{delay}/{times}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test redirect delay behavior with a bounded HTTP fixture.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/redirect-to",
+    "methods": [
+      "GET"
+    ],
+    "description": "Redirect to an HTTP(S) URL or local path without fetching it.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/redirect/{times}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test redirect behavior with a bounded HTTP fixture.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/request-trailers",
+    "methods": [
+      "POST"
+    ],
+    "description": "Read a bounded request and echo its trailers",
+    "group": "Requests",
+    "auth": false
+  },
+  {
+    "path": "/response-headers",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test response headers behavior with a bounded HTTP fixture.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/retry-after/{seconds}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Return 429 or 503 with a Retry-After header.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/robots.txt",
+    "methods": [
+      "GET"
+    ],
+    "description": "Crawler policy and sitemap location for this instance.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/sessions",
+    "methods": [
+      "POST"
+    ],
+    "description": "Create an isolated ephemeral workflow sandbox",
+    "group": "Workflows",
+    "auth": false
+  },
+  {
+    "path": "/sessions/{id}",
+    "methods": [
+      "DELETE"
+    ],
+    "description": "Delete an authenticated sandbox",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sessions/{id}/capture",
+    "methods": [
+      "POST"
+    ],
+    "description": "Capture a bounded webhook without forwarding it",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sessions/{id}/idempotency",
+    "methods": [
+      "POST"
+    ],
+    "description": "Replay a result or reject a conflicting idempotency key",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sessions/{id}/poll",
+    "methods": [
+      "GET"
+    ],
+    "description": "Simulate a job progressing from pending to complete",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sessions/{id}/rate-limit",
+    "methods": [
+      "GET"
+    ],
+    "description": "Exercise a per-session fixed-window rate limit",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sessions/{id}/requests",
+    "methods": [
+      "GET"
+    ],
+    "description": "Inspect captured requests in order",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sessions/{id}/sequence",
+    "methods": [
+      "DELETE",
+      "GET",
+      "HEAD",
+      "OPTIONS",
+      "PATCH",
+      "POST",
+      "PUT",
+      "TRACE",
+      "CONNECT"
+    ],
+    "description": "Consume a configured status sequence, then repeat the final status",
+    "group": "Workflows",
+    "auth": true
+  },
+  {
+    "path": "/sse",
+    "methods": [
+      "GET"
+    ],
+    "description": "Send a finite stream of Server-Sent Events.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/sse/resume",
+    "methods": [
+      "GET"
+    ],
+    "description": "Resume finite SSE events using Last-Event-ID",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/status/{code}",
+    "methods": [
+      "DELETE",
+      "GET",
+      "PATCH",
+      "POST",
+      "PUT"
+    ],
+    "description": "Return a recognized HTTP response status.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/stream-bytes/{count}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Stream random bytes in configurable chunks.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/stream/{count}",
+    "methods": [
+      "GET"
+    ],
+    "description": "Stream newline-delimited JSON records.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/text",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test text behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/time",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test time behavior with a bounded HTTP fixture.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/trailers",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test trailers behavior with a bounded HTTP fixture.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/unstable",
+    "methods": [
+      "GET"
+    ],
+    "description": "Randomly return 503 at a configurable failure rate.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/upload",
+    "methods": [
+      "POST"
+    ],
+    "description": "Test upload behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/utf8",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test utf8 behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/uuid",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test uuid behavior with a bounded HTTP fixture.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/validate/{format}",
+    "methods": [
+      "POST"
+    ],
+    "description": "Validate JSON, XML or multipart input",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/version",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test version behavior with a bounded HTTP fixture.",
+    "group": "Tools & discovery",
+    "auth": false
+  },
+  {
+    "path": "/weighted-status",
+    "methods": [
+      "GET"
+    ],
+    "description": "Choose a response status from a weighted distribution.",
+    "group": "Responses & resilience",
+    "auth": false
+  },
+  {
+    "path": "/ws",
+    "methods": [
+      "GET"
+    ],
+    "description": "Echo text and binary messages over WebSocket.",
+    "group": "Streams & timing",
+    "auth": false
+  },
+  {
+    "path": "/xml",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test xml behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/yaml",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test yaml behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  },
+  {
+    "path": "/zlib",
+    "methods": [
+      "GET"
+    ],
+    "description": "Test zlib behavior with a bounded HTTP fixture.",
+    "group": "Payloads & formats",
+    "auth": false
+  }
+]
