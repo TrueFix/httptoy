@@ -147,7 +147,7 @@ the workflow replaces matching assets instead of creating another release.
 
 #### Standalone binaries
 
-Each release includes six raw executables with the frontend and fixtures embedded:
+Each release includes 18 raw executables with the frontend and fixtures embedded:
 
 | OS | amd64 | arm64 |
 | :--- | :--- | :--- |
@@ -155,9 +155,19 @@ Each release includes six raw executables with the frontend and fixtures embedde
 | macOS | `httptoy_v2.0.0_darwin_amd64` | `httptoy_v2.0.0_darwin_arm64` |
 | Windows | `httptoy_v2.0.0_windows_amd64.exe` | `httptoy_v2.0.0_windows_arm64.exe` |
 
+Linux additionally includes `386`, `arm` (ARMv6+, including ARMv7), `loong64`,
+`mips`, `mipsle`, `mips64`, `mips64le`, `ppc64`, `ppc64le`, `riscv64`, and `s390x`.
+Windows additionally includes `386` (32-bit x86). These use the same filename
+pattern with the corresponding architecture; MIPS builds use software floating
+point. This covers every Linux, macOS, and Windows target supported by the pinned
+Go toolchain. macOS `amd64` is for Intel Macs; `arm64` is for Apple Silicon.
+
 Names above illustrate v2.0.0; each release uses its own version. No Docker, Go,
 Node, or external frontend directory is needed to run a download. Linux binaries
-are statically linked. Match your OS and CPU architecture, verify the original
+are statically linked and work across distributions such as Debian, Ubuntu,
+Fedora, Arch, and Alpine without requiring glibc or musl. Separate distro binaries
+are not needed; the kernel and CPU must still meet Go's platform requirements.
+Match your OS and CPU architecture, verify the original
 filename against `SHA256SUMS`, then mark the Linux/macOS binary executable and run
 it. The standalone server listens on all interfaces on port 8000; use a firewall
 and protect remote deployments with TLS and access controls as described above.

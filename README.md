@@ -52,6 +52,8 @@ Version `2` tracks stable v2 releases; use an exact tag such as `2.0.0` to pin a
 
 Download your OS/CPU binary from [GitHub Releases](https://github.com/TrueFix/httptoy/releases).
 The frontend is included—no Docker, Go, or Node installation needed.
+Linux downloads are static binaries shared across distros; see the
+[supported architectures](docs/REFERENCE.md#standalone-binaries) for Linux, macOS, and Windows.
 
 On Linux/macOS, rename the download to `httptoy`, then run:
 

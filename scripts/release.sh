@@ -33,13 +33,21 @@ if [ -n "$(ls -A "$output")" ]; then
   exit 1
 fi
 
-for target in linux/amd64 linux/arm64 darwin/amd64 darwin/arm64 windows/amd64 windows/arm64; do
+# Keep this matrix aligned with the Linux/macOS/Windows targets in `go tool dist list`.
+# Conservative CPU baselines keep the binaries useful on older hardware too.
+for target in \
+  linux/386 linux/amd64 linux/arm linux/arm64 linux/loong64 \
+  linux/mips linux/mipsle linux/mips64 linux/mips64le \
+  linux/ppc64 linux/ppc64le linux/riscv64 linux/s390x \
+  darwin/amd64 darwin/arm64 \
+  windows/386 windows/amd64 windows/arm64; do
   os=${target%/*}
   arch=${target#*/}
   name="httptoy_${version}_${os}_${arch}"
   if [ "$os" = windows ]; then name="$name.exe"; fi
   echo "Building $name"
-  CGO_ENABLED=0 GOOS="$os" GOARCH="$arch" go build -mod=readonly -trimpath \
+  CGO_ENABLED=0 GOOS="$os" GOARCH="$arch" GO386=sse2 GOAMD64=v1 GOARM=6 \
+    GOMIPS=softfloat GOMIPS64=softfloat go build -mod=readonly -trimpath \
     -ldflags="-s -w -X github.com/TrueFix/httptoy/pkg/server.buildVersion=$version -X github.com/TrueFix/httptoy/pkg/server.buildCommit=$commit" \
     -o "$output/$name" .
 done
