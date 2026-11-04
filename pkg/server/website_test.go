@@ -16,7 +16,7 @@ func TestWebsitePrerenderAndMetadata(t *testing.T) {
 	req := httptest.NewRequest("GET", "http://untrusted.example/", nil)
 	h.ServeHTTP(w, req)
 	body := w.Body.String()
-	for _, want := range []string{`<h1`, `BREAK THE`, `HAPPY PATH.`, `class="endpoint"`, `/sessions/{id}/idempotency`, `href="https://tests.example/"`, `https://tests.example/assets/social.png`, `<!-- -->`} {
+	for _, want := range []string{`<h1`, `BREAK THE`, `HAPPY PATH.`, `class="endpoint"`, `/sessions/{id}/idempotency`, `href="https://tests.example/"`, `https://tests.example/assets/social.png`, `<!-- -->`, `docker run -d`, `mayankfawkes/httptoy:2`} {
 		if !strings.Contains(body, want) {
 			t.Errorf("missing pre-rendered content %q", want)
 		}

@@ -2,7 +2,6 @@ package server
 
 import (
 	"net/http"
-	"os"
 
 	"github.com/TrueFix/httptoy/pkg/metrics"
 	"github.com/TrueFix/httptoy/pkg/routes"
@@ -21,7 +20,8 @@ func instrumentRouter(r *mux.Router) *metrics.Registry {
 	}); err != nil {
 		panic(err)
 	}
-	meter := metrics.New(os.Getenv("APP_VERSION"), os.Getenv("GIT_SHA"), templates, func() metrics.Resources {
+	version, commit := buildInfo()
+	meter := metrics.New(version, commit, templates, func() metrics.Resources {
 		snapshot := routes.ResourceSnapshot()
 		resources := metrics.Resources{SessionsActive: snapshot.SessionsActive, CaptureBytes: snapshot.CaptureBytes, CapturedRequests: snapshot.CapturedRequests, IdempotencyKeys: snapshot.IdempotencyKeys, SSEClients: snapshot.SSEClients}
 		for _, pool := range snapshot.Pools {

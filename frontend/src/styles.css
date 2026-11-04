@@ -242,6 +242,7 @@ h3 { font-size: clamp(44px, 4.8vw, 72px); }
 .install-options button { font-size: 13px; padding: 7px 13px; min-height: 36px; color: var(--secondary-panel); }
 .install-options button[aria-pressed="true"] { background: var(--panel); color: var(--primary); }
 .install-console pre { padding: 38px 24px; font-size: 13px; line-height: 2; min-height: 210px; }
+.install-console .install-note { margin: 0; padding: 0 24px 24px; max-width: none; color: var(--secondary-panel); font-size: 13px; line-height: 1.7; }
 .install-foot { background: var(--panel-raised); padding: 16px 24px; display: flex; gap: 14px; align-items: center; font-size: 12px; }
 .install-foot > span { color: var(--secondary-panel); }
 .install-foot svg { margin-left: auto; }

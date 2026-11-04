@@ -15,7 +15,7 @@ export const questions = [
   ['What is httptoy?', 'httptoy is an open-source HTTP testing API. It provides request inspection, response fixtures, fault simulation, streaming, authentication examples, and short-lived workflow sandboxes for testing HTTP clients.'],
   ['Is httptoy an alternative to httpbin?', 'Yes. httptoy covers common httpbin-style use cases such as request echoes, status codes, redirects, cookies, and compression, plus bounded workflow sessions, idempotency fixtures, and Prometheus metrics. Check the API reference when adapting existing tests.'],
   ['Do I need an API key?', 'Stateless test endpoints do not require an API key. Workflow sandboxes require the unique bearer token returned when you create a session. Authentication endpoints are protocol fixtures, not production identity services.'],
-  ['Can I run it on my own machine?', 'Yes. Clone the repository and run the Go server, or build the included Docker image. The frontend and its assets are embedded in the binary; no frontend server is needed in production.'],
+  ['Can I run it on my own machine?', 'Yes. Run mayankfawkes/httptoy:2 directly from Docker Hub with Docker or Docker Compose. No source checkout, Go toolchain, or Node server is needed. The frontend and its assets are included in the image.'],
   ['What are the limits?', 'Echo bodies and compressed/expanded upload data are capped at 1 MiB. Delays are capped at 10 seconds. Sessions expire within 10 minutes, have bounded capture storage, and share finite process-wide admission limits. The capabilities endpoint and README describe each limit.'],
   ['Is it safe to send production data?', 'No. Use synthetic test data. Common sensitive capture headers are redacted, but URLs, request bodies, and other values can still contain secrets. For remote deployment, use TLS, access controls, and monitoring-network restrictions.'],
 ] as const;
@@ -176,9 +176,34 @@ function APICatalog() {
 }
 
 function SelfHost() {
-  const [mode, setMode] = useState<'go' | 'docker'>('go');
-  const command = mode === 'go' ? 'git clone https://github.com/TrueFix/httptoy.git\ncd httptoy\ngo run .' : 'git clone https://github.com/TrueFix/httptoy.git\ncd httptoy\ndocker build -t httptoy .\ndocker run --rm -p 8000:8000 httptoy';
-  return <section className="self-host section-space" id="self-host" aria-labelledby="self-host-title"><div className="site-frame self-host-layout"><Reveal><h2 id="self-host-title">Your tests.<br />Your machine.</h2><p>The same HTTP playground, on your terms. One Go binary with the frontend embedded. No frontend server in production. No third-party request forwarding.</p><a href={`${reference}#run-locally`} className="text-action">Deployment instructions <ArrowUpRight size={18} aria-hidden="true" /></a><p className="deployment-note">Go 1.26+ · Linux, macOS, Windows<br />Use a current patched toolchain. For remote deployments, configure TLS, PUBLIC_URL, trusted proxies, and access controls.</p></Reveal><Reveal delay={0.08}><div className="install-console" data-ui><div className="install-heading"><div className="install-options" aria-label="Installation method"><button aria-pressed={mode === 'go'} onClick={() => setMode('go')}>Go</button><button aria-pressed={mode === 'docker'} onClick={() => setMode('docker')}>Docker</button></div><CopyButton text={command} /></div><pre tabIndex={0}><code>{command}</code></pre><div className="install-foot"><span>Then open</span><code>http://localhost:8000</code><ArrowUpRight size={16} aria-hidden="true" /></div></div></Reveal></div></section>;
+  const [mode, setMode] = useState<'docker' | 'compose'>('docker');
+  const command = mode === 'docker'
+    ? 'docker run -d --pull always --name httptoy \\\n  -p 127.0.0.1:8000:8000 \\\n  mayankfawkes/httptoy:2'
+    : 'services:\n  httptoy:\n    image: mayankfawkes/httptoy:2\n    ports:\n      - "127.0.0.1:8000:8000"\n    environment:\n      PUBLIC_URL: "${PUBLIC_URL:-http://localhost:8000}"\n    restart: unless-stopped';
+  return <section className="self-host section-space" id="self-host" aria-labelledby="self-host-title">
+    <div className="site-frame self-host-layout">
+      <Reveal>
+        <h2 id="self-host-title">Your tests.<br />Your machine.</h2>
+        <p>The same HTTP playground, straight from Docker Hub. No clone. Nothing to build. The frontend is included—just start the container and play.</p>
+        <a href={`${reference}#run-locally`} className="text-action">Deployment instructions <ArrowUpRight size={18} aria-hidden="true" /></a>
+        <p className="deployment-note">Docker or Docker Compose · Linux amd64 &amp; arm64<br />Local-only by default. For remote deployments, configure TLS, PUBLIC_URL, trusted proxies, and access controls.</p>
+      </Reveal>
+      <Reveal delay={0.08}>
+        <div className="install-console" data-ui>
+          <div className="install-heading">
+            <div className="install-options" aria-label="Installation method">
+              <button aria-pressed={mode === 'docker'} onClick={() => setMode('docker')}>Docker</button>
+              <button aria-pressed={mode === 'compose'} onClick={() => setMode('compose')}>Compose</button>
+            </div>
+            <CopyButton text={command} label={mode === 'compose' ? 'Copy Compose configuration' : 'Copy Docker command'} />
+          </div>
+          <pre tabIndex={0}><code>{command}</code></pre>
+          {mode === 'compose' && <p className="install-note">Save as <code>compose.yaml</code>, then run <code>docker compose up -d</code>.</p>}
+          <div className="install-foot"><span>Then open</span><code>http://localhost:8000</code><ArrowUpRight size={16} aria-hidden="true" /></div>
+        </div>
+      </Reveal>
+    </div>
+  </section>;
 }
 
 export default function App() {

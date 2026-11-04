@@ -47,6 +47,7 @@ func HTTPServer(address string) *http.Server {
 }
 
 func version(w http.ResponseWriter, req *http.Request) {
-	text := fmt.Sprintf("VERSION=%s\nGIT_SHA=%s", os.Getenv("APP_VERSION"), os.Getenv("GIT_SHA"))
+	version, commit := buildInfo()
+	text := fmt.Sprintf("VERSION=%s\nGIT_SHA=%s", version, commit)
 	httpx.Data(w, http.StatusOK, routes.CONTENT_TEXT, []byte(text))
 }

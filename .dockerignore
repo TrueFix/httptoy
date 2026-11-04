@@ -5,3 +5,7 @@ coverage.out
 frontend/node_modules
 frontend/.ssr
 .taste-skill
+dist
+.env
+.env.*
+!.env.example

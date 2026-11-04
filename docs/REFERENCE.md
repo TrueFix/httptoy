@@ -8,8 +8,21 @@
 
 ## Run locally
 
-Build from this checkout with Go 1.26 or newer (templates and sample files are
-embedded, so the binary can run from any directory):
+Run the published image without cloning the repository:
+
+```sh
+docker run -d --pull always --name httptoy \
+  -p 127.0.0.1:8000:8000 \
+  mayankfawkes/httptoy:2
+```
+
+Or save the [Compose configuration](../compose.yaml) locally, then run
+`docker compose up -d`. Open http://localhost:8000. The default port binding is
+local-only; for remote deployments, place it behind a TLS reverse proxy and set
+`PUBLIC_URL` to your public origin. Images support Linux amd64 and arm64.
+
+To build from source instead, use Go 1.26 or newer. Templates and sample files are
+embedded, so the binary can run from any directory:
 
 ```sh
 go run .
@@ -96,14 +109,79 @@ go test ./pkg/routes -run '^$' -bench . -benchmem
 Benchmarks use in-process HTTP recorders, not network traffic. See
 [PERFORMANCE.md](../PERFORMANCE.md) for bounded load-testing guidance.
 
-Docker pins Go 1.26.10 by image digest. CI extracts that exact toolchain version,
-checks module integrity/tidy drift, scans source and the statically built binary,
-and runs on a weekly schedule as well as pushes/PRs. Dependabot maintains module,
-Docker and action pins; periodically review the pinned govulncheck version too.
+Docker pins Go 1.26.10 by image digest. Run development checks locally before
+tagging a release. Dependabot maintains module, Docker and action pins;
+periodically review the pinned govulncheck version too.
 When distributing a binary, include [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md),
 this project's license and the Go license. The container includes them under
 `/licenses`. Review findings and remaining deployment caveats are in
 [REVIEWS.md](../REVIEWS.md).
+
+### Releases
+
+The only GitHub Actions workflow, [release.yml](../.github/workflows/release.yml),
+builds and pushes `mayankfawkes/httptoy` and publishes standalone binaries in a
+GitHub Release when a stable version tag is pushed, starting at **v2.0.0**.
+It does not run on branch pushes, pull requests or a schedule.
+
+Configure repository Actions secrets `DOCKERHUB_USERNAME` and `DOCKERHUB_TOKEN`.
+The username may alternatively be a repository Actions variable. The token must
+have write access to `mayankfawkes/httptoy`; never commit it. If credentials were
+configured in a named GitHub Environment rather than repository secrets, attach
+that environment to the workflow job before releasing.
+
+```sh
+git tag v2.0.0
+git push origin v2.0.0
+```
+
+This publishes `v2.0.0`, `2.0.0`, `2.0`, `2`, and `latest` for Linux amd64 and arm64.
+Pre-release tags are not published. The first v2 image becomes available only
+after the tagged workflow succeeds. Build metadata records the Git tag and commit.
+No release tag is created automatically.
+
+The same run creates a GitHub Release using the built-in `GITHUB_TOKEN`; no extra
+GitHub credential is required. It builds the binaries before pushing the image,
+then uploads all release assets before publishing the release draft. Re-running
+the workflow replaces matching assets instead of creating another release.
+
+#### Standalone binaries
+
+Each release includes six raw executables with the frontend and fixtures embedded:
+
+| OS | amd64 | arm64 |
+| :--- | :--- | :--- |
+| Linux | `httptoy_v2.0.0_linux_amd64` | `httptoy_v2.0.0_linux_arm64` |
+| macOS | `httptoy_v2.0.0_darwin_amd64` | `httptoy_v2.0.0_darwin_arm64` |
+| Windows | `httptoy_v2.0.0_windows_amd64.exe` | `httptoy_v2.0.0_windows_arm64.exe` |
+
+Names above illustrate v2.0.0; each release uses its own version. No Docker, Go,
+Node, or external frontend directory is needed to run a download. Linux binaries
+are statically linked. Match your OS and CPU architecture, verify the original
+filename against `SHA256SUMS`, then mark the Linux/macOS binary executable and run
+it. The standalone server listens on all interfaces on port 8000; use a firewall
+and protect remote deployments with TLS and access controls as described above.
+
+The release also includes `LICENSE`, `THIRD_PARTY_NOTICES.md`,
+`FRONTEND_NOTICES.md`, `Go-LICENSE`, and `SHA256SUMS`. Preserve the notices when
+redistributing binaries. `/version` and `/metrics` report the embedded release tag
+and commit; `APP_VERSION` and `GIT_SHA` remain available as runtime overrides.
+
+To build the same assets locally, first build the frontend, then run from the
+repository root with an empty output directory:
+
+```sh
+sh scripts/release.sh dist v2.0.0 "$(git rev-parse HEAD)"
+```
+
+#### Updating Docker Compose
+
+To update an existing Compose deployment within v2:
+
+```sh
+docker compose pull
+docker compose up -d
+```
 
 ## API Endpoints
 
@@ -372,7 +450,7 @@ different container or host.
 
 | Metric | Type | Meaning |
 | :--- | :--- | :--- |
-| `httptoy_info{version,git_sha}` | gauge | Build metadata from APP_VERSION/GIT_SHA; defaults unknown/development. |
+| `httptoy_info{version,git_sha}` | gauge | Embedded build metadata, overridable with APP_VERSION/GIT_SHA; development builds default to unknown/development. |
 | `httptoy_uptime_seconds` | gauge | Process uptime. |
 | `httptoy_http_requests_total{method,route,status}` | counter | Completed handlers by trusted route template and recorded status (default 200 if unset). |
 | `httptoy_http_request_duration_seconds{method,route}` | histogram | Handler duration with cumulative buckets from 5 ms to 30s, plus +Inf/sum/count. |
