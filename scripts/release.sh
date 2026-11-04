@@ -17,7 +17,7 @@ esac
 go_license="$(go env GOROOT)/LICENSE"
 if [ ! -f "$go_license" ]; then
   # Some distro packages move the license outside GOROOT. This is the official
-  # Go BSD license, mirrored from the production toolchain's go1.26.10 tag.
+  # Go BSD license, originally mirrored from Go's go1.26.10 tag.
   go_license=licenses/Go-LICENSE
 fi
 for notice in LICENSE THIRD_PARTY_NOTICES.md FRONTEND_NOTICES.md "$go_license"; do

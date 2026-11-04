@@ -82,7 +82,7 @@ npm run build
 npm audit
 ```
 
-Use Node 24 (Docker pins 24.22.2). `npm run dev` starts Vite on localhost; run the
+Use Node 26 (Docker pins 26.13.0). `npm run dev` starts Vite on localhost; run the
 Go API separately with `go run .` on port 8000 for the dev proxy. The Docker build regenerates
 the API catalog and frontend automatically, then ships only the Go binary.
 
@@ -109,7 +109,7 @@ go test ./pkg/routes -run '^$' -bench . -benchmem
 Benchmarks use in-process HTTP recorders, not network traffic. See
 [PERFORMANCE.md](../PERFORMANCE.md) for bounded load-testing guidance.
 
-Docker pins Go 1.26.10 by image digest. Run development checks locally before
+Docker pins Go 1.27.3 by image digest. Run development checks locally before
 tagging a release. Dependabot maintains module, Docker and action pins;
 periodically review the pinned govulncheck version too.
 When distributing a binary, include [THIRD_PARTY_NOTICES.md](../THIRD_PARTY_NOTICES.md),
